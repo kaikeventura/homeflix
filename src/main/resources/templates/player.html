@@ -5,7 +5,7 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8"/>
-    <title>Playe</title>
+    <title>Página Inicial</title>
 </head>
 
 <body>
@@ -23,27 +23,19 @@
 </header>
 <section layout:fragment="body">
     <div class="container">
-        <h1>Lista de Vídeos</h1>
 
-        <!-- Lista de Filmes -->
-        <div class="row">
-            <div class="col s12">
-                <h2>Filmes</h2>
-                <ul class="collection">
-                    <li th:each="film : ${films}" class="collection-item" th:text="${film}"></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Lista de Séries -->
-        <div class="row">
-            <div class="col s12">
-                <h2>Séries</h2>
-                <ul class="collection">
-                    <li th:each="serie : ${series}" class="collection-item">
-                        <a th:href="@{'/player/series?serie=' + ${serie}}" th:text="${serie}"></a>
-                    </li>
-                </ul>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h4>Player de Vídeo</h4>
+                    <div class="video-container">
+                        <video class="responsive-video" controls>
+                            <source th:src="@{'/streaming/series/' + ${serie}}" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

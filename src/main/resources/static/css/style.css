@@ -17,10 +17,6 @@
 	box-shadow: 2px 2px 2px 0.5px white;
 }
 
-body {
-    background: black;
-}
-
 logged-user {
     text-transform: uppercase;
 }
