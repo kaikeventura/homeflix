@@ -14,7 +14,7 @@ import java.nio.file.Paths
 
 @RestController
 @RequestMapping("/streaming")
-class VideoController(
+class StreamingController(
     private val httpSession: HttpSession
 ) {
 
