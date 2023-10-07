@@ -1,5 +1,6 @@
-package com.kaikeventura.homeflix.controller
+package com.kaikeventura.homeflix.controller.common
 
+import jakarta.servlet.http.HttpSession
 import org.springframework.core.io.FileSystemResource
 import org.springframework.core.io.Resource
 import org.springframework.http.MediaType
@@ -13,17 +14,23 @@ import java.nio.file.Paths
 
 @RestController
 @RequestMapping("/streaming")
-class VideoController {
+class VideoController(
+    private val httpSession: HttpSession
+) {
 
-    @GetMapping(value = ["/{videoType}/{videoName}"], produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE])
+    @GetMapping(value = ["/{videoName}"], produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE])
     @Throws(
         IOException::class
     )
     fun getVideo(
-        @PathVariable("videoType") videoType: String,
         @PathVariable("videoName") videoName: String
     ): ResponseEntity<Resource> {
-        val videoPath = Paths.get("/home/kaike/Videos/${videoType}/${videoName}")
+        val serieName = httpSession.getAttribute("currentSerieName")
+        val season = httpSession.getAttribute("currentSeason")
+
+        val videoPath = Paths.get("/home/kaike/Videos/series/${serieName}/${season}/${videoName}").takeIf { season != null }
+            ?: Paths.get("/home/kaike/Videos/films/${videoName}")
+
         val videoResource: Resource = FileSystemResource(videoPath.toFile())
         return ResponseEntity.ok()
             .contentLength(videoResource.contentLength())

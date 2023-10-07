@@ -23,22 +23,14 @@
 </header>
 <section layout:fragment="body">
     <div class="container">
-        <!-- Lista de Filmes -->
-        <div class="row">
-            <div class="col s12">
-                <h2>Filmes</h2>
-                <ul class="collection">
-                    <a th:href="@{/filmes}">Filmes</a>
-                </ul>
-            </div>
-        </div>
-
         <!-- Lista de Séries -->
         <div class="row">
             <div class="col s12">
-                <h2>Séries</h2>
+                <h2>Episódios</h2>
                 <ul class="collection">
-                    <a th:href="@{/series}">Séries</a>
+                    <li th:each="episode : ${episodes}" class="collection-item">
+                        <a th:href="@{'/player/series?videoName=' + ${episode}}" th:text="${episode}"></a>
+                    </li>
                 </ul>
             </div>
         </div>

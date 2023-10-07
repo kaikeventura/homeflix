@@ -14,9 +14,9 @@
         <div class="nav-wrapper purple lighten-3">
             <a class="brand-logo center"><img class="materialboxed" width="140" th:src="@{/img/homeflix.png}"></a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">JavaScript</a></li>
+                <li><a th:href="@{/}">Incio</a></li>
+                <li><a th:href="@{/series}">Séries</a></li>
+                <li><a th:href="@{/films}">Filmes</a></li>
             </ul>
         </div>
     </nav>
@@ -31,7 +31,7 @@
                     <h4>Player de Vídeo</h4>
                     <div class="video-container">
                         <video class="responsive-video" controls>
-                            <source th:src="@{'/streaming/series/' + ${serie}}" type="video/mp4">
+                            <source th:src="@{'/streaming/' + ${videoName}}" type="video/mp4">
                             Seu navegador não suporta o elemento de vídeo.
                         </video>
                     </div>

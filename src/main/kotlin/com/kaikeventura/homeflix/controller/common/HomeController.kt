@@ -1,4 +1,4 @@
-package com.kaikeventura.homeflix.controller
+package com.kaikeventura.homeflix.controller.common
 
 import org.springframework.http.HttpStatus.OK
 import org.springframework.stereotype.Controller

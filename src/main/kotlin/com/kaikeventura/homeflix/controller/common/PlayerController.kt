@@ -1,5 +1,6 @@
-package com.kaikeventura.homeflix.controller
+package com.kaikeventura.homeflix.controller.common
 
+import jakarta.servlet.http.HttpSession
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
@@ -9,14 +10,16 @@ import org.springframework.web.servlet.ModelAndView
 
 
 @Controller
-@RequestMapping("/player/series")
-class PlayerController {
+@RequestMapping("/player")
+class PlayerController(
+    private val httpSession: HttpSession
+) {
 
-    @GetMapping
-    fun player(@RequestParam serie: String?): ModelAndView {
+    @GetMapping("/series")
+    fun player(@RequestParam videoName: String?): ModelAndView {
         return ModelAndView(
             "player",
-            mapOf(Pair("serie", serie)),
+            mapOf(Pair("videoName", videoName)),
             HttpStatus.OK
         )
     }
