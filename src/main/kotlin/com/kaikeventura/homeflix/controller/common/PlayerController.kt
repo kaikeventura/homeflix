@@ -15,7 +15,7 @@ class PlayerController(
     private val httpSession: HttpSession
 ) {
 
-    @GetMapping("/series")
+    @GetMapping("/series", "films")
     fun player(@RequestParam videoName: String?): ModelAndView {
         return ModelAndView(
             "player",
