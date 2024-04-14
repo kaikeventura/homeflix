@@ -1,6 +1,7 @@
 package com.kaikeventura.homeflix.controller.common
 
 import jakarta.servlet.http.HttpSession
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.FileSystemResource
 import org.springframework.core.io.Resource
 import org.springframework.http.MediaType
@@ -15,7 +16,8 @@ import java.nio.file.Paths
 @RestController
 @RequestMapping("/streaming")
 class StreamingController(
-    private val httpSession: HttpSession
+    private val httpSession: HttpSession,
+    @Value("\${APP_DIR_BASE}") private val baseDir: String
 ) {
 
     @GetMapping(value = ["/{videoName}"], produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE])
@@ -28,8 +30,8 @@ class StreamingController(
         val serieName = httpSession.getAttribute("currentSerieName")
         val season = httpSession.getAttribute("currentSeason")
 
-        val videoPath = Paths.get("/home/kaike/Videos/series/${serieName}/${season}/${videoName}").takeIf { season != null }
-            ?: Paths.get("/home/kaike/Videos/films/${videoName}")
+        val videoPath = Paths.get("$baseDir/series/${serieName}/${season}/${videoName}").takeIf { season != null }
+            ?: Paths.get("$baseDir/films/${videoName}")
 
         val videoResource: Resource = FileSystemResource(videoPath.toFile())
         return ResponseEntity.ok()
