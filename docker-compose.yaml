@@ -1,7 +1,8 @@
 version: '3.8'
 
 services:
-  app:
+  homeflix:
+    container_name: homeflix
     build: .
     ports:
       - "8050:8080"
